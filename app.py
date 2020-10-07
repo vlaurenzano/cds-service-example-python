@@ -1,5 +1,5 @@
 from flask import Flask, json
-from flask.ext.cors import CORS
+from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)

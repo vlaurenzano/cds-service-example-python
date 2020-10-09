@@ -14,7 +14,7 @@ def discovery():
         'description': 'An example static CDS service in Python',
         'id': 'static',
         'prefetch': {
-          'patient': 'Patient/{{Patient.id}}'
+          'patient': 'Patient/{{context.patientId}}'
         }
       }
     ]

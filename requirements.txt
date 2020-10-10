@@ -1,2 +1,2 @@
-git+git://github.com/vlaurenzano/cds-hooks-work.git@186d9e810fa786b13c3e6a26c28900ff142ea2cc#egg=cds-hooks-work
+git+git://github.com/vlaurenzano/cds-hooks-work.git@6718809dc29f618f31e8c823cccaaac367e7be6e#egg=cds-hooks-work
 gunicorn==20.0.4

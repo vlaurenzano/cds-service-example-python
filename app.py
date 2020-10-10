@@ -16,10 +16,11 @@ service = cds.Service.patient_view("myid", "mydesc", greeting)
 
 app.register_service(service)
 
-def serve(environ, start_response):
-    print(environ, start_response)
-    cds.serve(app, host='0.0.0.0', debug=debug)
+def serve(*args, **kwargs):
+
+    port = os.environ.get("SERVER_PORT", 5000)
+    cds.serve(app, host='0.0.0.0', port=port, debug=debug)
 
 if __name__ == '__main__':
-   serve("direct", "starting from local")
+   serve()
 

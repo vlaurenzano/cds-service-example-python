@@ -16,4 +16,4 @@ service = cds.Service.patient_view("myid", "mydesc", greeting)
 
 app.register_service(service)
 
-cds.serve(app, debug=debug)
+cds.serve(app, host='0.0.0.0', debug=debug)

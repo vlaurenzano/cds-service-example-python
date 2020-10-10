@@ -3,7 +3,7 @@ import os
 
 debug = os.environ.get('DEBUG', False)
 
-app = cds.App()
+cds_app = cds.App()
 
 
 def greeting(r: cds.PatientViewRequest) -> cds.Response:
@@ -14,7 +14,7 @@ def greeting(r: cds.PatientViewRequest) -> cds.Response:
 
 service = cds.Service.patient_view("myid", "mydesc", greeting)
 
-app.register_service(service)
+cds_app.register_service(service)
 
 def app(*args, **kwargs):
 

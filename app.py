@@ -14,4 +14,4 @@ def greeting(r: cds.PatientViewRequest) -> cds.Response:
 if __name__ == '__main__':
     debug = os.environ.get('DEBUG', False)
     port = os.environ.get("PORT", 5000)
-    app.serv(debug=debug, port=port)
+    app.serv(host="0.0.0.0", debug=debug, port=port)

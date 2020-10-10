@@ -8,6 +8,7 @@ app = cds.App()
 def greeting(r: cds.PatientViewRequest) -> cds.Response:
     resp = cds.Response()
     resp.cards = [cds.Card.info("hello world!", "demo_service")]
+    resp.httpStatusCode = 200
     return resp
 
 

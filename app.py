@@ -16,6 +16,9 @@ service = cds.Service.patient_view("myid", "mydesc", greeting)
 
 app.register_service(service)
 
-if __name__ == '__main__':
+def serve():
     cds.serve(app, host='0.0.0.0', debug=debug)
+
+if __name__ == '__main__':
+   serve()
 

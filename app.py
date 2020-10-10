@@ -1,62 +1,19 @@
-from flask import Flask, json
-from flask_cors import CORS
+import cds_hooks_work as cds
 import os
-
-app = Flask(__name__)
-cors = CORS(app)
 
 debug = os.environ.get('DEBUG', False)
 
-
-@app.route('/cds-services')
-def discovery():
-    return json.jsonify({
-        'services': [
-            {
-                'hook': 'patient-view',
-                'name': 'Static CDS Service in Python',
-                'description': 'An example static CDS service in Python',
-                'id': 'static',
-                'prefetch': {
-                    'patient': 'Patient/{{Patient.id}}'
-                }
-            }
-        ]
-    })
+app = cds.App()
 
 
-@app.route('/cds-services/static', methods=['POST'])
-def service():
-    card1 = card('Success Card', 'success', link('Static CDS Service', 'http://example.com'))
-    card1['detail'] = 'This is a test of a static success card.'
-    card1['links'].append(link('Google', 'https://google.com'))
-    card1['links'].append(link('Github', 'https://github.com'))
-
-    source = link('Static CDS Service')
-
-    card2 = card('Info card', 'info', source)
-    card3 = card('Warning card', 'warning', source)
-    card4 = card('Hard stop card', 'hard-stop', source)
-
-    return json.jsonify({
-        'cards': [card1, card2, card3, card4]
-    })
+def greeting(r: cds.PatientViewRequest) -> cds.Response:
+    resp = cds.Response()
+    resp.cards = [cds.Card.info("hello world!", "demo_service")]
+    return resp
 
 
-def card(summary, indicator, source):
-    return {
-        'summary': summary, 'detail': '', 'indicator': indicator,
-        'source': source, 'links': []
-    }
+service = cds.Service.patient_view("myid", "mydesc", greeting)
 
+app.register_service(service)
 
-def link(label, url=None):
-    result = {'label': label}
-    if url:
-        result['url'] = url
-
-    return result
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=debug)
+cds.serve(app, debug=debug)

@@ -18,7 +18,7 @@ cds_app.register_service(service)
 
 def app(*args, **kwargs):
 
-    port = os.environ.get("SERVER_PORT", 5000)
+    port = os.environ.get("PORT", 5000)
     cds.serve(cds_app, host='0.0.0.0', port=port, debug=debug)
 
 if __name__ == '__main__':
